@@ -1,0 +1,6 @@
+@RubiusTestTask_HostAddress = http://localhost:5012
+
+GET {{RubiusTestTask_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
