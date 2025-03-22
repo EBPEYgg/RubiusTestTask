@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiusTestTask.Domain", "Ru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiusTestTask.Application", "RubiusTestTask.Application\RubiusTestTask.Application.csproj", "{C37EB909-5E0F-4B80-ACC0-E99981976A69}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubiusTestTask.DataAccess", "RubiusTestTask.DataAccess\RubiusTestTask.DataAccess.csproj", "{24D4394F-5F1D-48BC-B63D-74D989EEFBD6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C37EB909-5E0F-4B80-ACC0-E99981976A69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C37EB909-5E0F-4B80-ACC0-E99981976A69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C37EB909-5E0F-4B80-ACC0-E99981976A69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24D4394F-5F1D-48BC-B63D-74D989EEFBD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24D4394F-5F1D-48BC-B63D-74D989EEFBD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24D4394F-5F1D-48BC-B63D-74D989EEFBD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24D4394F-5F1D-48BC-B63D-74D989EEFBD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

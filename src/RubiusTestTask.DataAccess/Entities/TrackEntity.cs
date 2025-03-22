@@ -1,17 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace RubiusTestTask.Domain.Models
+namespace RubiusTestTask.DataAccess.Entities
 {
-    public class Track
+    public class TrackEntity
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
-        public string Duration { get; set; }
+        public string? Duration { get; set; }
 
         public bool IsFavorite { get; set; }
 
@@ -22,6 +22,6 @@ namespace RubiusTestTask.Domain.Models
         [ForeignKey("Album")]
         public int AlbumId { get; set; }
 
-        public Album Album { get; set; }
+        public AlbumEntity? Album { get; set; }
     }
 }

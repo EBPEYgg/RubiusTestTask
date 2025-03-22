@@ -1,9 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using RubiusTestTask.DataAccess.Data;
+using RubiusTestTask.DataAccess.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<MusicDbContext>(
+    options => options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(MusicDbContext))));
 
 var app = builder.Build();
 
