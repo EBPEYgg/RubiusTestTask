@@ -6,7 +6,7 @@ namespace RubiusTestTask.Domain.Models
     public class Track
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -20,8 +20,6 @@ namespace RubiusTestTask.Domain.Models
         public int Rating { get; set; } // 1 – like, -1 – dislike, 0 – нет оценки
 
         [ForeignKey("Album")]
-        public int AlbumId { get; set; }
-
-        public Album Album { get; set; }
+        public long AlbumId { get; set; }
     }
 }

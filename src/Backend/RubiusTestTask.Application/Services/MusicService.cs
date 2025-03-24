@@ -25,7 +25,7 @@ namespace RubiusTestTask.Application.Services
             return musicians;
         }
 
-        public async Task<IEnumerable<Track>> GetTracksByMusicianAsync(int musicianId)
+        public async Task<IEnumerable<Track>> GetTracksByMusicianAsync(long musicianId)
         {
             _logger.LogInformation("Retrieving tracks with musician id={id}.", musicianId);
             var tracks = await _repository.GetTracksByMusicianAsync(musicianId);
@@ -35,11 +35,12 @@ namespace RubiusTestTask.Application.Services
                 _logger.LogWarning("Tracks with musician id={id} not found.", musicianId);
                 throw new KeyNotFoundException($"Tracks with musician id={musicianId} not found.");
             }
+
             _logger.LogInformation("Successfully retrieved tracks with musician id={id}.", musicianId);
             return tracks;
         }
 
-        public async Task<IEnumerable<Track>> GetTracksByAlbumAsync(int albumId)
+        public async Task<IEnumerable<Track>> GetTracksByAlbumAsync(long albumId)
         {
             _logger.LogInformation("Retrieving tracks by album with id={id}.", albumId);
             var tracks = await _repository.GetTracksByAlbumAsync(albumId);
@@ -49,23 +50,24 @@ namespace RubiusTestTask.Application.Services
                 _logger.LogWarning("Tracks by album with id={id} not found.", albumId);
                 throw new KeyNotFoundException($"Tracks by album with id={albumId} not found.");
             }
+
             _logger.LogInformation("Successfully retrieved tracks by album with id={id}.", albumId);
             return tracks;
         }
 
-        public async Task RateTrackAsync(int trackId, int rating)
+        public async Task RateTrackAsync(long trackId, int rating)
         {
             await _repository.RateTrackAsync(trackId, rating);
             _logger.LogInformation("Track with id={0} rated as {1}", trackId, rating);
         }
 
-        public async Task MarkTrackAsListenedAsync(int trackId)
+        public async Task MarkTrackAsListenedAsync(long trackId)
         {
             await _repository.MarkTrackAsListenedAsync(trackId);
             _logger.LogInformation("Track with id={0} marked as listened", trackId);
         }
 
-        public async Task AddTrackToFavoritesAsync(int trackId)
+        public async Task AddTrackToFavoritesAsync(long trackId)
         {
             await _repository.AddTrackToFavoritesAsync(trackId);
             _logger.LogInformation("Track with id={0} added to favorites", trackId);

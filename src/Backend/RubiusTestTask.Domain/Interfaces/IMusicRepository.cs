@@ -6,14 +6,14 @@ namespace RubiusTestTask.Domain.Interfaces
     {
         Task<IEnumerable<Musician>> GetMusiciansWithAlbumsAsync();
 
-        Task<IEnumerable<Track>> GetTracksByMusicianAsync(int musicianId);
+        Task<IEnumerable<Track>> GetTracksByMusicianAsync(long musicianId);
 
-        Task<IEnumerable<Track>> GetTracksByAlbumAsync(int albumId);
+        Task<IEnumerable<Track>> GetTracksByAlbumAsync(long albumId);
 
-        Task RateTrackAsync(int trackId, int rating);
+        Task RateTrackAsync(long trackId, int rating);
 
-        Task MarkTrackAsListenedAsync(int trackId);
+        Task MarkTrackAsListenedAsync(long trackId);
 
-        Task AddTrackToFavoritesAsync(int trackId);
+        Task AddTrackToFavoritesAsync(long trackId);
     }
 }

@@ -6,7 +6,7 @@ namespace RubiusTestTask.DataAccess.Entities
     public class TrackEntity
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; } = null!;
@@ -20,8 +20,6 @@ namespace RubiusTestTask.DataAccess.Entities
         public int Rating { get; set; } // 1 – like, -1 – dislike, 0 – нет оценки
 
         [ForeignKey("Album")]
-        public int AlbumId { get; set; }
-
-        public AlbumEntity? Album { get; set; }
+        public long AlbumId { get; set; }
     }
 }

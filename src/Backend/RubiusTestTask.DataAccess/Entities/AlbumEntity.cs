@@ -6,7 +6,7 @@ namespace RubiusTestTask.DataAccess.Entities
     public class AlbumEntity
     {
         [Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         public string Name { get; set; } = null!;
@@ -14,9 +14,7 @@ namespace RubiusTestTask.DataAccess.Entities
         public int ReleaseYear { get; set; }
 
         [ForeignKey("Musician")]
-        public int MusicianId { get; set; }
-
-        public MusicianEntity? Musician { get; set; }
+        public long MusicianId { get; set; }
 
         public ICollection<TrackEntity>? Tracks { get; set; }
     }

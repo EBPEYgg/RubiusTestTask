@@ -32,6 +32,7 @@ namespace RubiusTestTask.DataAccess.Repositories
             return musicianEntities.Select(entity => _mapper.Map<Musician>(entity));
         }
 
+        public async Task<IEnumerable<Track>> GetTracksByMusicianAsync(long musicianId)
         {
             var albumEntities = await _context.Albums
                 .Where(a => a.MusicianId == musicianId)
@@ -46,6 +47,7 @@ namespace RubiusTestTask.DataAccess.Repositories
             return tracks.Select(trackEntity => _mapper.Map<Track>(trackEntity));
         }
 
+        public async Task<IEnumerable<Track>> GetTracksByAlbumAsync(long albumId)
         {
             var albumEntity = await _context.Albums
                 .Include(a => a.Tracks)
@@ -63,6 +65,7 @@ namespace RubiusTestTask.DataAccess.Repositories
             return albumEntity.Tracks?.Select(entity => _mapper.Map<Track>(entity)) ?? new List<Track>();
         }
 
+        public async Task RateTrackAsync(long trackId, int rating)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
             if (trackEntity != null)
@@ -72,7 +75,7 @@ namespace RubiusTestTask.DataAccess.Repositories
             }
         }
 
-        public async Task MarkTrackAsListenedAsync(int trackId)
+        public async Task MarkTrackAsListenedAsync(long trackId)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
             if (trackEntity != null)
@@ -82,7 +85,7 @@ namespace RubiusTestTask.DataAccess.Repositories
             }
         }
 
-        public async Task AddTrackToFavoritesAsync(int trackId)
+        public async Task AddTrackToFavoritesAsync(long trackId)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
             if (trackEntity != null)
