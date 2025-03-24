@@ -48,7 +48,7 @@ namespace RubiusTestTask.DataAccess.Migrations
 
                     b.HasIndex("MusicianEntityId");
 
-                    b.ToTable("Albums");
+                    b.ToTable("Albums", (string)null);
                 });
 
             modelBuilder.Entity("RubiusTestTask.DataAccess.Entities.MusicianEntity", b =>
@@ -75,7 +75,7 @@ namespace RubiusTestTask.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Musicians");
+                    b.ToTable("Musicians", (string)null);
                 });
 
             modelBuilder.Entity("RubiusTestTask.DataAccess.Entities.TrackEntity", b =>
@@ -113,7 +113,7 @@ namespace RubiusTestTask.DataAccess.Migrations
 
                     b.HasIndex("AlbumEntityId");
 
-                    b.ToTable("Tracks");
+                    b.ToTable("Tracks", (string)null);
                 });
 
             modelBuilder.Entity("RubiusTestTask.DataAccess.Entities.AlbumEntity", b =>
