@@ -8,7 +8,8 @@ namespace RubiusTestTask.DataAccess.Entities
         [Key]
         public long Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, ErrorMessage = "Name cannot be longer than 100 characters.")]
         public string Name { get; set; } = null!;
 
         public string? Duration { get; set; }
