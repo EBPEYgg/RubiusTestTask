@@ -57,20 +57,23 @@ namespace RubiusTestTask.Application.Services
 
         public async Task RateTrackAsync(long trackId, int rating)
         {
+            _logger.LogInformation("Rating a track with id={0} as {1}.", trackId, rating);
             await _repository.RateTrackAsync(trackId, rating);
-            _logger.LogInformation("Track with id={0} rated as {1}", trackId, rating);
+            _logger.LogInformation("Successfully rating of track with id={0} rated as {1}.", trackId, rating);
         }
 
         public async Task MarkTrackAsListenedAsync(long trackId)
         {
+            _logger.LogInformation("Marking a track with id={0} as listened.", trackId);
             await _repository.MarkTrackAsListenedAsync(trackId);
-            _logger.LogInformation("Track with id={0} marked as listened", trackId);
+            _logger.LogInformation("Track with id={0} has been successfully marked as listened.", trackId);
         }
 
         public async Task AddTrackToFavoritesAsync(long trackId)
         {
+            _logger.LogInformation("Adding a track with id={0} to favorites.", trackId);
             await _repository.AddTrackToFavoritesAsync(trackId);
-            _logger.LogInformation("Track with id={0} added to favorites", trackId);
+            _logger.LogInformation("Successfully adding track with id={0} added to favorites.", trackId);
         }
     }
 }
