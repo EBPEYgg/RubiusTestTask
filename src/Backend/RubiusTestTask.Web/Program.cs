@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
+using RubiusTestTask.Application.MappingProfiles;
 using RubiusTestTask.Application.Services;
 using RubiusTestTask.DataAccess.Data;
 using RubiusTestTask.DataAccess.Repositories;
@@ -10,6 +11,8 @@ var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentCla
 logger.Debug("Initializing application");
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
 
 // Add services to the container.
 builder.Services.AddControllers();

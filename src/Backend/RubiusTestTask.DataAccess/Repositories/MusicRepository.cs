@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using RubiusTestTask.DataAccess.Data;
-using RubiusTestTask.DataAccess.Entities;
 using RubiusTestTask.Domain.Interfaces;
 using RubiusTestTask.Domain.Models;
 
@@ -10,9 +10,12 @@ namespace RubiusTestTask.DataAccess.Repositories
     {
         private readonly MusicDbContext _context;
 
-        public MusicRepository(MusicDbContext context)
+        private readonly IMapper _mapper;
+
+        public MusicRepository(MusicDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<Musician>> GetMusiciansWithAlbumsAsync()
@@ -26,7 +29,9 @@ namespace RubiusTestTask.DataAccess.Repositories
             return musicianEntities.Select(MapMusician);
         }
 
-        public async Task<IEnumerable<Track>> GetTracksByMusicianAsync(int musicianId)
+            return musicianEntities.Select(entity => _mapper.Map<Musician>(entity));
+        }
+
         {
             var albumEntities = await _context.Albums
                 .Where(a => a.MusicianId == musicianId)
@@ -34,10 +39,13 @@ namespace RubiusTestTask.DataAccess.Repositories
                 .AsNoTracking()
                 .ToListAsync();
 
-            return albumEntities.SelectMany(a => a.Tracks.Select(MapTrack));
+            var tracks = albumEntities.SelectMany(a => a.Tracks).ToList();
+
         }
 
-        public async Task<IEnumerable<Track>> GetTracksByAlbumAsync(int albumId)
+            return tracks.Select(trackEntity => _mapper.Map<Track>(trackEntity));
+        }
+
         {
             var albumEntity = await _context.Albums
                 .Include(a => a.Tracks)
@@ -52,7 +60,9 @@ namespace RubiusTestTask.DataAccess.Repositories
             return albumEntity.Tracks.Select(MapTrack);
         }
 
-        public async Task RateTrackAsync(int trackId, int rating)
+            return albumEntity.Tracks?.Select(entity => _mapper.Map<Track>(entity)) ?? new List<Track>();
+        }
+
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
             if (trackEntity != null)
