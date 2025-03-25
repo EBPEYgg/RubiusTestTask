@@ -26,8 +26,10 @@ namespace RubiusTestTask.DataAccess.Repositories
                 .AsNoTracking()
                 .ToListAsync();
 
-            return musicianEntities.Select(MapMusician);
-        }
+            if (musicianEntities == null || !musicianEntities.Any())
+            {
+                throw new KeyNotFoundException("No musicians found.");
+            }
 
             return musicianEntities.Select(entity => _mapper.Map<Musician>(entity));
         }
@@ -42,96 +44,62 @@ namespace RubiusTestTask.DataAccess.Repositories
 
             var tracks = albumEntities.SelectMany(a => a.Tracks).ToList();
 
-        }
+            if (tracks == null || !tracks.Any())
+            {
+                throw new KeyNotFoundException($"No tracks found for musician with id={musicianId}.");
+            }
 
             return tracks.Select(trackEntity => _mapper.Map<Track>(trackEntity));
         }
 
         public async Task<IEnumerable<Track>> GetTracksByAlbumAsync(long albumId)
         {
-            var albumEntity = await _context.Albums
-                .Include(a => a.Tracks)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(a => a.Id == albumId);
+            var tracks = await _context.Tracks
+                .Where(t => t.AlbumId == albumId)
+                .ToListAsync();
 
-            if (albumEntity == null || albumEntity.Tracks == null)
+            if (tracks == null || !tracks.Any())
             {
-                return new List<Track>();
+                throw new KeyNotFoundException($"No tracks found for album with id={albumId}.");
             }
 
-            return albumEntity.Tracks.Select(MapTrack);
-        }
-
-            return albumEntity.Tracks?.Select(entity => _mapper.Map<Track>(entity)) ?? new List<Track>();
+            return tracks.Select(trackEntity => _mapper.Map<Track>(trackEntity)) ?? new List<Track>();
         }
 
         public async Task RateTrackAsync(long trackId, int rating)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
-            if (trackEntity != null)
+            if (trackEntity == null)
             {
-                trackEntity.Rating = rating;
-                await _context.SaveChangesAsync();
+                throw new KeyNotFoundException($"Track with id={trackId} not found.");
             }
+
+            trackEntity.Rating = rating; // не проверяет ограничения
+            await _context.SaveChangesAsync();
         }
 
         public async Task MarkTrackAsListenedAsync(long trackId)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
-            if (trackEntity != null)
+            if (trackEntity == null)
             {
-                trackEntity.IsListened = true;
-                await _context.SaveChangesAsync();
+                throw new KeyNotFoundException($"Track with id={trackId} not found.");
             }
+
+            trackEntity.IsListened = true;
+            await _context.SaveChangesAsync();
         }
 
         public async Task AddTrackToFavoritesAsync(long trackId)
         {
             var trackEntity = await _context.Tracks.FindAsync(trackId);
-            if (trackEntity != null)
+            if (trackEntity == null)
             {
-                trackEntity.IsFavorite = true;
-                await _context.SaveChangesAsync();
+                throw new KeyNotFoundException($"Track with id={trackId} not found.");
             }
-        }
 
-        #region Mapping Helpers
-        private Musician MapMusician(MusicianEntity entity)
-        {
-            return new Musician
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Age = entity.Age,
-                Genre = entity.Genre ?? string.Empty,
-                CareerStartYear = entity.CareerStartYear,
-                Albums = entity.Albums?.Select(MapAlbum).ToList() ?? new List<Album>()
-            };
+            trackEntity.IsFavorite = true;
+            await _context.SaveChangesAsync();
         }
-
-        private Album MapAlbum(AlbumEntity entity)
-        {
-            return new Album
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                ReleaseYear = entity.ReleaseYear,
-                Tracks = entity.Tracks?.Select(MapTrack).ToList() ?? new List<Track>()
-            };
-        }
-
-        private Track MapTrack(TrackEntity entity)
-        {
-            return new Track
-            {
-                Id = entity.Id,
-                Name = entity.Name,
-                Duration = entity.Duration,
-                IsFavorite = entity.IsFavorite,
-                IsListened = entity.IsListened,
-                Rating = entity.Rating
-            };
-        }
-        #endregion
     }
 }

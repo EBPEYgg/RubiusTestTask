@@ -6,6 +6,7 @@ using RubiusTestTask.Application.Services;
 using RubiusTestTask.DataAccess.Data;
 using RubiusTestTask.DataAccess.Repositories;
 using RubiusTestTask.Domain.Interfaces;
+using RubiusTestTask.Web.Middleware;
 
 var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 logger.Debug("Initializing application");
@@ -25,6 +26,8 @@ builder.Services.AddDbContext<MusicDbContext>(
 
 var app = builder.Build();
 logger.Info("Starting the app");
+
+app.ConfigureExceptionHandler();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
