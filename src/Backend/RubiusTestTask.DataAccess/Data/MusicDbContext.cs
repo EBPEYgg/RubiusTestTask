@@ -12,5 +12,13 @@ namespace RubiusTestTask.DataAccess.Data
         public DbSet<TrackEntity> Tracks { get; set; }
 
         public MusicDbContext(DbContextOptions<MusicDbContext> options) : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<TrackEntity>()
+                .ToTable(t => t.HasCheckConstraint("CK_Track_Rating", "\"Rating\" IN (-1, 0, 1)"));
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -77,7 +77,7 @@ namespace RubiusTestTask.DataAccess.Repositories
                 throw new KeyNotFoundException($"Track with id={trackId} not found.");
             }
 
-            trackEntity.Rating = rating; // не проверяет ограничения
+            trackEntity.Rating = rating;
             await _context.SaveChangesAsync();
         }
 

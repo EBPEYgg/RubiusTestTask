@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using NLog;
 
 namespace RubiusTestTask.Web.Middleware
 {
@@ -15,7 +16,7 @@ namespace RubiusTestTask.Web.Middleware
             {
                 errorApp.Run(async context =>
                 {
-                    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+                    var logger = LogManager.GetCurrentClassLogger();
                     var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
 
                     context.Response.StatusCode = 500;
@@ -23,7 +24,7 @@ namespace RubiusTestTask.Web.Middleware
 
                     if (exceptionHandlerPathFeature?.Error is not null)
                     {
-                        logger.LogError(exceptionHandlerPathFeature.Error, "Unhandled exception occurred.");
+                        logger.Error(exceptionHandlerPathFeature.Error, "Unhandled exception occurred.");
 
                         await context.Response.WriteAsync(System.Text.Json.JsonSerializer.Serialize(new
                         {
