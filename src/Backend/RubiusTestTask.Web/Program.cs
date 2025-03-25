@@ -24,7 +24,7 @@ builder.Services.AddDbContext<MusicDbContext>(
     options => options.UseNpgsql(builder.Configuration.GetConnectionString(nameof(MusicDbContext))));
 
 var app = builder.Build();
-app.Logger.LogInformation("Starting the app");
+logger.Info("Starting the app");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
