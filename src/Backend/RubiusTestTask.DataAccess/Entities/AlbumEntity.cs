@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RubiusTestTask.DataAccess.Entities
 {
+    /// <summary>
+    /// Класс, описывающий музкальный альбом.
+    /// </summary>
     public class AlbumEntity
     {
         [Key]

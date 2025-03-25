@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RubiusTestTask.Domain.Models
 {
+    /// <summary>
+    /// Класс, описывающий музыкальный альбом.
+    /// </summary>
     public class Album
     {
         [Key]

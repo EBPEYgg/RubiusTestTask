@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RubiusTestTask.Domain.Models
 {
+    /// <summary>
+    /// Класс, описывающий музыкальное произведение.
+    /// </summary>
     public class Track
     {
         [Key]
@@ -17,7 +20,7 @@ namespace RubiusTestTask.Domain.Models
 
         public bool IsListened { get; set; }
 
-        public int Rating { get; set; } // 1 – like, -1 – dislike, 0 – нет оценки
+        public int Rating { get; set; }
 
         [ForeignKey("Album")]
         public long AlbumId { get; set; }

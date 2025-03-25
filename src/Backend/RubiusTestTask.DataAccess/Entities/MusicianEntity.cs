@@ -2,6 +2,9 @@
 
 namespace RubiusTestTask.DataAccess.Entities
 {
+    /// <summary>
+    /// Класс, описывающий музкального исполнителя.
+    /// </summary>
     public class MusicianEntity
     {
         [Key]

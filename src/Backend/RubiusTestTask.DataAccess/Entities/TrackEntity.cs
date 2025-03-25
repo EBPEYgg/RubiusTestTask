@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RubiusTestTask.DataAccess.Entities
 {
+    /// <summary>
+    /// Класс, описывающий музкальное произведение.
+    /// </summary>
     public class TrackEntity
     {
         [Key]
@@ -18,7 +21,7 @@ namespace RubiusTestTask.DataAccess.Entities
 
         public bool IsListened { get; set; }
 
-        public int Rating { get; set; } // 1 – like, -1 – dislike, 0 – нет оценки
+        public int Rating { get; set; }
 
         [ForeignKey("Album")]
         public long AlbumId { get; set; }

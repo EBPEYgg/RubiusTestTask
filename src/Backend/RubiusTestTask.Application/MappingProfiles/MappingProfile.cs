@@ -4,8 +4,14 @@ using RubiusTestTask.Domain.Models;
 
 namespace RubiusTestTask.Application.MappingProfiles
 {
+    /// <summary>
+    /// Профиль маппинга для AutoMapper.
+    /// </summary>
     public class MappingProfile : Profile
     {
+        /// <summary>
+        /// Создает новый экземпляр класса <see cref="MappingProfile"/>.
+        /// </summary>
         public MappingProfile()
         {
             CreateMap<MusicianEntity, Musician>()

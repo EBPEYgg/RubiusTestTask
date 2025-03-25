@@ -6,6 +6,9 @@ using RubiusTestTask.Domain.Models;
 
 namespace RubiusTestTask.DataAccess.Repositories
 {
+    /// <summary>
+    /// Реализация репозитория для работы с музыкой.
+    /// </summary>
     public class MusicRepository : IMusicRepository
     {
         private readonly MusicDbContext _context;

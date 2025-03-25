@@ -2,6 +2,9 @@
 
 namespace RubiusTestTask.Domain.Models
 {
+    /// <summary>
+    /// Класс, описывающий музыкального исполнителя.
+    /// </summary>
     public class Musician
     {
         [Key]

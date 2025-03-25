@@ -4,6 +4,9 @@ using RubiusTestTask.Domain.Models;
 
 namespace RubiusTestTask.Application.Services
 {
+    /// <summary>
+    /// Сервис для работы с музыкой.
+    /// </summary>
     public class MusicService : IMusicService
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

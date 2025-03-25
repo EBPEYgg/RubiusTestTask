@@ -2,6 +2,9 @@
 
 namespace RubiusTestTask.Domain.Interfaces
 {
+    /// <summary>
+    /// Интерфейс репозитория для работы с музыкальными произведениями.
+    /// </summary>
     public interface IMusicRepository
     {
         Task<IEnumerable<Musician>> GetMusiciansWithAlbumsAsync();
